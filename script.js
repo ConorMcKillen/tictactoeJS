@@ -61,10 +61,52 @@ const promptMessage = (playerNumber) => {
   GameBoard.gameBoard[row][col] = players.playersArr[playerNumber].token;
 };
 
-const playGame = (function () {
+const setArrays = function () {
+  GameBoard.firstColumn = [
+    GameBoard.firstRow[0],
+    GameBoard.secondRow[0],
+    GameBoard.thirdRow[0],
+  ];
+  GameBoard.secondColumn = [
+    GameBoard.firstRow[1],
+    GameBoard.secondRow[1],
+    GameBoard.thirdRow[1],
+  ];
+  GameBoard.thirdColumn = [
+    GameBoard.firstRow[2],
+    GameBoard.secondRow[2],
+    GameBoard.thirdRow[2],
+  ];
+  GameBoard.diagonalLeft = [
+    GameBoard.firstRow[0],
+    GameBoard.secondRow[1],
+    GameBoard.thirdRow[2],
+  ];
+  GameBoard.diagonalRight = [
+    GameBoard.firstRow[2],
+    GameBoard.secondRow[1],
+    GameBoard.thirdRow[0],
+  ];
+};
+
+const setCompare = function (token) {
   const winnerX = ['X', 'X', 'X'];
   const winnerO = ['O', 'O', 'O'];
+  let winner;
+  winner = token === 'X' ? winnerX : winnerO;
+  return (
+    compareArray(GameBoard.firstRow, winner) ||
+    compareArray(GameBoard.secondRow, winner) ||
+    compareArray(GameBoard.thirdRow, winner) ||
+    compareArray(GameBoard.firstColumn, winner) ||
+    compareArray(GameBoard.secondColumn, winner) ||
+    compareArray(GameBoard.thirdColumn, winner) ||
+    compareArray(GameBoard.diagonalLeft, winner) ||
+    compareArray(GameBoard.diagonalRight, winner)
+  );
+};
 
+const playGame = (function () {
   console.log(GameBoard.firstRow);
   console.log(GameBoard.secondRow);
   console.log(GameBoard.thirdRow);
@@ -81,208 +123,47 @@ const playGame = (function () {
     } else if (i === 4) {
       promptMessage(0); // Third go for X
       // Check for a winner as three have been entered
-      GameBoard.firstColumn = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[0],
-        GameBoard.thirdRow[0],
-      ];
-      GameBoard.secondColumn = [
-        GameBoard.firstRow[1],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[1],
-      ];
-      GameBoard.thirdColumn = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[2],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalLeft = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalRight = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[0],
-      ];
-      if (
-        compareArray(GameBoard.firstRow, winnerX) ||
-        compareArray(GameBoard.secondRow, winnerX) ||
-        compareArray(GameBoard.thirdRow, winnerX) ||
-        compareArray(GameBoard.firstColumn, winnerX) ||
-        compareArray(GameBoard.secondColumn, winnerX) ||
-        compareArray(GameBoard.thirdColumn, winnerX) ||
-        compareArray(GameBoard.diagonalLeft, winnerX) ||
-        compareArray(GameBoard.diagonalRight, winnerX)
-      ) {
+      setArrays();
+
+      if (setCompare('X')) {
         console.log('Player One wins!');
         console.log(GameBoard.gameBoard);
         return;
       }
     } else if (i === 5) {
       promptMessage(1); // Third go for O
-      GameBoard.firstColumn = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[0],
-        GameBoard.thirdRow[0],
-      ];
-      GameBoard.secondColumn = [
-        GameBoard.firstRow[1],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[1],
-      ];
-      GameBoard.thirdColumn = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[2],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalLeft = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalRight = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[0],
-      ];
-      if (
-        compareArray(GameBoard.firstRow, winnerO) ||
-        compareArray(GameBoard.secondRow, winnerO) ||
-        compareArray(GameBoard.thirdRow, winnerO) ||
-        compareArray(GameBoard.firstColumn, winnerO) ||
-        compareArray(GameBoard.secondColumn, winnerO) ||
-        compareArray(GameBoard.thirdColumn, winnerO) ||
-        compareArray(GameBoard.diagonalLeft, winnerO) ||
-        compareArray(GameBoard.diagonalRight, winnerO)
-      ) {
+      setArrays();
+
+      if (setCompare('O')) {
         console.log('Player Two wins!');
         console.log(GameBoard.gameBoard);
         return;
       }
     } else if (i === 6) {
       promptMessage(0); // Fourth go for X
-      GameBoard.firstColumn = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[0],
-        GameBoard.thirdRow[0],
-      ];
-      GameBoard.secondColumn = [
-        GameBoard.firstRow[1],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[1],
-      ];
-      GameBoard.thirdColumn = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[2],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalLeft = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalRight = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[0],
-      ];
-      if (
-        compareArray(GameBoard.firstRow, winnerX) ||
-        compareArray(GameBoard.secondRow, winnerX) ||
-        compareArray(GameBoard.thirdRow, winnerX) ||
-        compareArray(GameBoard.firstColumn, winnerX) ||
-        compareArray(GameBoard.secondColumn, winnerX) ||
-        compareArray(GameBoard.thirdColumn, winnerX) ||
-        compareArray(GameBoard.diagonalLeft, winnerX) ||
-        compareArray(GameBoard.diagonalRight, winnerX)
-      ) {
+      setArrays();
+      if (setCompare('X')) {
         console.log('Player One wins!');
         console.log(GameBoard.gameBoard);
         return;
       }
     } else if (i === 7) {
       promptMessage(1); // Fourth go for O
-      GameBoard.firstColumn = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[0],
-        GameBoard.thirdRow[0],
-      ];
-      GameBoard.secondColumn = [
-        GameBoard.firstRow[1],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[1],
-      ];
-      GameBoard.thirdColumn = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[2],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalLeft = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalRight = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[0],
-      ];
-      if (
-        compareArray(GameBoard.firstRow, winnerO) ||
-        compareArray(GameBoard.secondRow, winnerO) ||
-        compareArray(GameBoard.thirdRow, winnerO) ||
-        compareArray(GameBoard.firstColumn, winnerO) ||
-        compareArray(GameBoard.secondColumn, winnerO) ||
-        compareArray(GameBoard.thirdColumn, winnerO) ||
-        compareArray(GameBoard.diagonalLeft, winnerO) ||
-        compareArray(GameBoard.diagonalRight, winnerO)
-      ) {
+      setArrays();
+      if (setCompare('O')) {
         console.log('Player Two wins!');
         console.log(GameBoard.gameBoard);
         return;
       }
     } else if (i === 8) {
       promptMessage(0); // Fifth go for X
-      GameBoard.firstColumn = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[0],
-        GameBoard.thirdRow[0],
-      ];
-      GameBoard.secondColumn = [
-        GameBoard.firstRow[1],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[1],
-      ];
-      GameBoard.thirdColumn = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[2],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalLeft = [
-        GameBoard.firstRow[0],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[2],
-      ];
-      GameBoard.diagonalRight = [
-        GameBoard.firstRow[2],
-        GameBoard.secondRow[1],
-        GameBoard.thirdRow[0],
-      ];
-      if (
-        compareArray(GameBoard.firstRow, winnerX) ||
-        compareArray(GameBoard.secondRow, winnerX) ||
-        compareArray(GameBoard.thirdRow, winnerX) ||
-        compareArray(GameBoard.firstColumn, winnerX) ||
-        compareArray(GameBoard.secondColumn, winnerX) ||
-        compareArray(GameBoard.thirdColumn, winnerX) ||
-        compareArray(GameBoard.diagonalLeft, winnerX) ||
-        compareArray(GameBoard.diagonalRight, winnerX)
-      ) {
+      setArrays();
+      if (setCompare('X')) {
         console.log('Player One wins!');
         console.log(GameBoard.gameBoard);
         return;
+      } else {
+        alert('It is a draw');
       }
     }
   }
