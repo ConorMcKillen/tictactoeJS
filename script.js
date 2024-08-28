@@ -1,3 +1,6 @@
+const gameGrid = document.querySelector('.game-grid');
+const activePlayers = document.querySelector('.active-players');
+
 const GameBoard = (function () {
   let gameBoard = [
     ['', '', ''],
@@ -106,67 +109,155 @@ const setCompare = function (token) {
   );
 };
 
-const playGame = (function () {
-  console.log(GameBoard.firstRow);
-  console.log(GameBoard.secondRow);
-  console.log(GameBoard.thirdRow);
+const displayGame = {
+  newGameBoard: GameBoard.gameBoard,
+  firstRow: GameBoard.firstRow,
+  secondRow: GameBoard.secondRow,
+  thirdRow: GameBoard.thirdRow,
+  displayBoard: function () {
+    let sectionId = 0;
+    for (let i = 0; i < 3; i++) {
+      const gameSection = document.createElement('div');
+      gameSection.classList.add('game-section');
+      gameSection.id = sectionId;
+      sectionId++;
+      let squareId = 0;
+      for (let j = 0; j < 3; j++) {
+        const square = document.createElement('div');
 
-  for (let i = 0; i < 9; i++) {
-    if (i === 0) {
-      promptMessage(0); // First go for X
-    } else if (i === 1) {
-      promptMessage(1); // First go for O
-    } else if (i === 2) {
-      promptMessage(0); // Second go for X
-    } else if (i === 3) {
-      promptMessage(1); // Second go for O
-    } else if (i === 4) {
-      promptMessage(0); // Third go for X
-      // Check for a winner as three have been entered
-      setArrays();
+        square.classList.add('square');
+        square.id = squareId;
+        squareId++;
+        // square.textContent = this.newGameBoard[i][j];
+        gameSection.appendChild(square);
+      }
 
-      if (setCompare('X')) {
-        console.log('Player One wins!');
-        console.log(GameBoard.gameBoard);
-        return;
-      }
-    } else if (i === 5) {
-      promptMessage(1); // Third go for O
-      setArrays();
-
-      if (setCompare('O')) {
-        console.log('Player Two wins!');
-        console.log(GameBoard.gameBoard);
-        return;
-      }
-    } else if (i === 6) {
-      promptMessage(0); // Fourth go for X
-      setArrays();
-      if (setCompare('X')) {
-        console.log('Player One wins!');
-        console.log(GameBoard.gameBoard);
-        return;
-      }
-    } else if (i === 7) {
-      promptMessage(1); // Fourth go for O
-      setArrays();
-      if (setCompare('O')) {
-        console.log('Player Two wins!');
-        console.log(GameBoard.gameBoard);
-        return;
-      }
-    } else if (i === 8) {
-      promptMessage(0); // Fifth go for X
-      setArrays();
-      if (setCompare('X')) {
-        console.log('Player One wins!');
-        console.log(GameBoard.gameBoard);
-        return;
-      } else {
-        alert('It is a draw');
-      }
+      gameGrid.appendChild(gameSection);
     }
-  }
+  },
+};
 
-  console.log(GameBoard.gameBoard);
+const newGame = Object.create(displayGame);
+newGame.displayBoard();
+
+const playGame = (function () {
+  let currentPlayerIndex = 0;
+  let roundsPlayed = 0;
+
+  document.querySelectorAll('.square').forEach((item) => {
+    item.addEventListener('click', (e) => {
+      roundsPlayed++;
+
+      let currentPlayer = players.playersArr[currentPlayerIndex].name;
+      let currentToken = players.playersArr[currentPlayerIndex].token;
+
+      e.target.textContent = currentToken;
+      console.log(currentPlayer);
+
+      console.log(e.target.parentNode.id);
+      GameBoard.gameBoard[e.target.parentNode.id][e.target.id] = currentToken;
+      console.log(GameBoard.gameBoard);
+      console.log(roundsPlayed);
+
+      if (roundsPlayed === 5) {
+        setArrays();
+        if (setCompare('X')) {
+          console.log('Player One wins');
+        }
+      } else if (roundsPlayed === 6) {
+        setArrays();
+        if (setCompare('O')) {
+          console.log('Player Two wins');
+        }
+      } else if (roundsPlayed === 7) {
+        setArrays();
+        if (setCompare('X')) {
+          console.log('Player One wins');
+        }
+      } else if (roundsPlayed === 8) {
+        setArrays();
+        if (setCompare('O')) {
+          console.log('Player Two wins');
+        }
+      } else if (roundsPlayed === 9) {
+        setArrays();
+        if (setCompare('X')) {
+          console.log('Player One wins');
+        }
+      } else if (roundsPlayed > 9) {
+        console.log('It is a draw');
+      }
+
+      currentPlayerIndex = (currentPlayerIndex + 1) % players.playersArr.length;
+    });
+  });
 })();
+
+const gameLoop = function () {
+  for (let i = 0; i < 9; i++) {}
+};
+
+// const playGame = (function () {
+//   console.log(GameBoard.firstRow);
+//   console.log(GameBoard.secondRow);
+//   console.log(GameBoard.thirdRow);
+
+//   for (let i = 0; i < 9; i++) {
+//     if (i === 0) {
+//       promptMessage(0); // First go for X
+//     } else if (i === 1) {
+//       promptMessage(1); // First go for O
+//     } else if (i === 2) {
+//       promptMessage(0); // Second go for X
+//     } else if (i === 3) {
+//       promptMessage(1); // Second go for O
+//     } else if (i === 4) {
+//       promptMessage(0); // Third go for X
+//       // Check for a winner as three have been entered
+//       setArrays();
+
+//       if (setCompare('X')) {
+//         console.log('Player One wins!');
+//         console.log(GameBoard.gameBoard);
+//         return;
+//       }
+//     } else if (i === 5) {
+//       promptMessage(1); // Third go for O
+//       setArrays();
+
+//       if (setCompare('O')) {
+//         console.log('Player Two wins!');
+//         console.log(GameBoard.gameBoard);
+//         return;
+//       }
+//     } else if (i === 6) {
+//       promptMessage(0); // Fourth go for X
+//       setArrays();
+//       if (setCompare('X')) {
+//         console.log('Player One wins!');
+//         console.log(GameBoard.gameBoard);
+//         return;
+//       }
+//     } else if (i === 7) {
+//       promptMessage(1); // Fourth go for O
+//       setArrays();
+//       if (setCompare('O')) {
+//         console.log('Player Two wins!');
+//         console.log(GameBoard.gameBoard);
+//         return;
+//       }
+//     } else if (i === 8) {
+//       promptMessage(0); // Fifth go for X
+//       setArrays();
+//       if (setCompare('X')) {
+//         console.log('Player One wins!');
+//         console.log(GameBoard.gameBoard);
+//         return;
+//       } else {
+//         alert('It is a draw');
+//       }
+//     }
+//   }
+
+//   console.log(GameBoard.gameBoard);
+// })();

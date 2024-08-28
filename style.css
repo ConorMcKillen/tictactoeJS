@@ -1,0 +1,37 @@
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  font-size: 2.4rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.game-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-section {
+  display: flex;
+}
+
+.square {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.game-section .square:last-child {
+  border-right: 1px solid black;
+}
+
+.game-grid .game-section:last-child .square {
+  border-bottom: 1px solid black;
+}
