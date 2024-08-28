@@ -1,5 +1,7 @@
 const gameGrid = document.querySelector('.game-grid');
 const activePlayers = document.querySelector('.active-players');
+const playerOne = document.querySelector('.player-one');
+const playerTwo = document.querySelector('.player-two');
 
 const GameBoard = (function () {
   let gameBoard = [
@@ -143,6 +145,7 @@ newGame.displayBoard();
 const playGame = (function () {
   let currentPlayerIndex = 0;
   let roundsPlayed = 0;
+  playerOne.style.backgroundColor = 'red';
 
   document.querySelectorAll('.square').forEach((item) => {
     item.addEventListener('click', (e) => {
@@ -150,6 +153,16 @@ const playGame = (function () {
 
       let currentPlayer = players.playersArr[currentPlayerIndex].name;
       let currentToken = players.playersArr[currentPlayerIndex].token;
+
+      if (currentToken === 'X') {
+        playerOne.style.backgroundColor = 'white';
+        playerTwo.style.backgroundColor = 'red';
+      }
+
+      if (currentToken === 'O') {
+        playerTwo.style.backgroundColor = 'white';
+        playerOne.style.backgroundColor = 'red';
+      }
 
       e.target.textContent = currentToken;
       console.log(currentPlayer);
