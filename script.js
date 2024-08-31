@@ -145,7 +145,8 @@ newGame.displayBoard();
 const playGame = (function () {
   let currentPlayerIndex = 0;
   let roundsPlayed = 0;
-  playerOne.style.backgroundColor = 'red';
+  playerOne.style.backgroundColor = '#f8b400';
+  playerTwo.style.backgroundColor = '#faf5e4';
 
   document.querySelectorAll('.square').forEach((item) => {
     item.addEventListener('click', (e) => {
@@ -155,13 +156,13 @@ const playGame = (function () {
       let currentToken = players.playersArr[currentPlayerIndex].token;
 
       if (currentToken === 'X') {
-        playerOne.style.backgroundColor = 'white';
-        playerTwo.style.backgroundColor = 'red';
+        playerOne.style.backgroundColor = '#faf5e4';
+        playerTwo.style.backgroundColor = '#f8b400';
       }
 
       if (currentToken === 'O') {
-        playerTwo.style.backgroundColor = 'white';
-        playerOne.style.backgroundColor = 'red';
+        playerTwo.style.backgroundColor = '#faf5e4';
+        playerOne.style.backgroundColor = '#f8b400';
       }
 
       e.target.textContent = currentToken;
