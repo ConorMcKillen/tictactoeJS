@@ -6,6 +6,10 @@ const result = document.querySelector('.result');
 const editButton = document.querySelector('.edit-names');
 const modal = document.getElementById('myModal');
 const closeBtn = document.querySelector('.close');
+const playerOneName = document.getElementById('playerOneName');
+const playerTwoName = document.getElementById('playerTwoName');
+const updatePlayerOne = document.getElementById('updatePlayerOne');
+const updatePlayerTwo = document.getElementById('updatePlayerTwo');
 
 const GameBoard = (function () {
   let gameBoard = [
@@ -54,6 +58,23 @@ const players = (function (playerOne = 'Player One', playerTwo = 'Player Two') {
 
   return { playersArr };
 })();
+
+const updatePlayerNames = (function () {
+  playerOne.innerHTML = players.playersArr[0].name;
+  playerTwo.innerHTML = players.playersArr[1].name;
+})();
+
+updatePlayerOne.addEventListener('click', () => {
+  players.playersArr[0].name = playerOneName.value;
+  console.log(players.playersArr[0].name);
+  playerOne.innerHTML = playerOneName.value;
+});
+
+updatePlayerTwo.addEventListener('click', () => {
+  players.playersArr[1].name = playerOneName.value;
+  console.log(players.playersArr[1].name);
+  playerTwo.innerHTML = playerTwoName.value;
+});
 
 const promptMessage = (playerNumber) => {
   console.log(
@@ -224,10 +245,6 @@ window.onclick = (e) => {
   if (e.target == modal) {
     modal.style.display = 'none';
   }
-};
-
-const gameLoop = function () {
-  for (let i = 0; i < 9; i++) {}
 };
 
 // const playGame = (function () {

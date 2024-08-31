@@ -18,8 +18,8 @@
       <h1>Tic Tac Toe</h1>
       <div class="game-grid"></div>
       <div class="active-players">
-        <div class="player-one">Player 1</div>
-        <div class="player-two">Player 2</div>
+        <div class="player-one"></div>
+        <div class="player-two"></div>
       </div>
       <div class="verdict">Verdict:</div>
       <div class="result"></div>
@@ -40,6 +40,12 @@
               value="Player 1"
               class="inputName"
             />
+            <input
+              type="button"
+              value="Update"
+              class="updateNameButton"
+              id="updatePlayerOne"
+            />
             <label for="playerTwoName" class="name-label"
               >Player Two Name:</label
             >
@@ -49,6 +55,12 @@
               name="playerTwoName"
               value="Player 2"
               class="inputName"
+            />
+            <input
+              type="button"
+              value="Update"
+              class="updateNameButton"
+              id="updatePlayerTwo"
             />
           </div>
         </div>

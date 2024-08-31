@@ -76,7 +76,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2rem;
+  padding: 0.8rem;
   width: 8rem;
   border: solid 1px black;
 }
@@ -151,4 +151,20 @@ h1 {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.updateNameButton {
+  width: 12%;
+  align-items: center;
+  background-color: #004445;
+  border: none;
+  padding: 0.4rem;
+  color: #faf5e4;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.updateNameButton:hover,
+.updateNameButton:focus {
+  color: #f8b400;
 }
