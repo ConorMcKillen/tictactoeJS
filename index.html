@@ -15,6 +15,7 @@
   </head>
   <body>
     <section class="main-section">
+      <h1>Tic Tac Toe</h1>
       <div class="game-grid"></div>
       <div class="active-players">
         <div class="player-one">Player 1</div>
@@ -23,6 +24,35 @@
       <div class="verdict">Verdict:</div>
       <div class="result"></div>
       <div class="new-game">NEW GAME</div>
+      <div class="edit-names">Edit Name</div>
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="name-section">
+            <label for="playerOneName" class="name-label"
+              >Player One Name:</label
+            >
+            <input
+              type="text"
+              id="playerOneName"
+              name="playerOneName"
+              value="Player 1"
+              class="inputName"
+            />
+            <label for="playerTwoName" class="name-label"
+              >Player Two Name:</label
+            >
+            <input
+              type="text"
+              id="playerTwoName"
+              name="playerTwoName"
+              value="Player 2"
+              class="inputName"
+            />
+          </div>
+        </div>
+      </div>
     </section>
   </body>
 </html>

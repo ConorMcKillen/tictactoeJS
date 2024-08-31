@@ -2,6 +2,10 @@ const gameGrid = document.querySelector('.game-grid');
 const activePlayers = document.querySelector('.active-players');
 const playerOne = document.querySelector('.player-one');
 const playerTwo = document.querySelector('.player-two');
+const result = document.querySelector('.result');
+const editButton = document.querySelector('.edit-names');
+const modal = document.getElementById('myModal');
+const closeBtn = document.querySelector('.close');
 
 const GameBoard = (function () {
   let gameBoard = [
@@ -177,6 +181,7 @@ const playGame = (function () {
         setArrays();
         if (setCompare('X')) {
           console.log('Player One wins');
+          result.innerHTML = 'Player One wins';
         }
       } else if (roundsPlayed === 6) {
         setArrays();
@@ -206,6 +211,20 @@ const playGame = (function () {
     });
   });
 })();
+
+editButton.addEventListener('click', () => {
+  modal.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.onclick = (e) => {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+  }
+};
 
 const gameLoop = function () {
   for (let i = 0; i < 9; i++) {}
