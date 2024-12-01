@@ -10,6 +10,7 @@ const playerOneName = document.getElementById('playerOneName');
 const playerTwoName = document.getElementById('playerTwoName');
 const updatePlayerOne = document.getElementById('updatePlayerOne');
 const updatePlayerTwo = document.getElementById('updatePlayerTwo');
+const newGameButton = document.querySelector('.new-game');
 
 const GameBoard = (function () {
   let gameBoard = [
@@ -39,6 +40,20 @@ const GameBoard = (function () {
     diagonalRight,
   };
 })();
+
+const resetGameBoard = function () {
+  GameBoard.gameBoard = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+  ];
+
+  GameBoard.firstRow = GameBoard.gameBoard[0];
+  GameBoard.secondRow = GameBoard.gameBoard[1];
+  GameBoard.thirdRow = GameBoard.gameBoard[2];
+
+  setArrays();
+};
 
 const compareArray = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b);
@@ -167,6 +182,8 @@ const displayGame = {
 const newGame = Object.create(displayGame);
 newGame.displayBoard();
 
+let gameOver = false;
+
 const playGame = (function () {
   let currentPlayerIndex = 0;
   let roundsPlayed = 0;
@@ -175,7 +192,9 @@ const playGame = (function () {
 
   document.querySelectorAll('.square').forEach((item) => {
     item.addEventListener('click', (e) => {
+      if (gameOver || e.target.textContent) return;
       roundsPlayed++;
+      console.log(`Rounds played ${roundsPlayed}`);
 
       let currentPlayer = players.playersArr[currentPlayerIndex].name;
       let currentToken = players.playersArr[currentPlayerIndex].token;
@@ -202,34 +221,70 @@ const playGame = (function () {
         setArrays();
         if (setCompare('X')) {
           console.log('Player One wins');
-          result.innerHTML = 'Player One wins';
+          result.innerHTML = `${playerOneName.value} wins`;
+          gameOver = true;
+          resetGameBoard();
         }
       } else if (roundsPlayed === 6) {
         setArrays();
         if (setCompare('O')) {
           console.log('Player Two wins');
+          result.innerHTML = `${playerTwoName.value} wins`;
+          gameOver = true;
+          resetGameBoard();
         }
       } else if (roundsPlayed === 7) {
         setArrays();
         if (setCompare('X')) {
           console.log('Player One wins');
+          result.innerHTML = `${playerOneName.value} wins`;
+          gameOver = true;
+          resetGameBoard();
         }
       } else if (roundsPlayed === 8) {
         setArrays();
         if (setCompare('O')) {
           console.log('Player Two wins');
+          result.innerHTML = `${playerTwoName.value} wins`;
+          gameOver = true;
+          resetGameBoard();
         }
       } else if (roundsPlayed === 9) {
         setArrays();
         if (setCompare('X')) {
           console.log('Player One wins');
+          result.innerHTML = `${playerOneName.value} wins`;
+          gameOver = true;
+        } else if (setCompare('O')) {
+          console.log('Player Two wins');
+          result.innerHTML = `${playerTwoName.value} wins`;
+          gameOver = true;
+        } else {
+          console.log('It is a draw');
+          result.innerHTML = 'It is a draw!';
+          gameOver = true;
         }
-      } else if (roundsPlayed > 9) {
-        console.log('It is a draw');
+        resetGameBoard();
       }
 
       currentPlayerIndex = (currentPlayerIndex + 1) % players.playersArr.length;
     });
+  });
+
+  newGameButton.addEventListener('click', () => {
+    document.querySelectorAll('.square').forEach((item) => {
+      item.textContent = '';
+    });
+
+    resetGameBoard();
+    gameOver = false;
+    roundsPlayed = 0;
+    currentPlayerIndex = 0;
+
+    playerOne.style.backgroundColor = '#f8b400';
+    playerTwo.style.backgroundColor = '#faf5e4';
+
+    result.innerHTML = '';
   });
 })();
 
